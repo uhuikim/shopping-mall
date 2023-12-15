@@ -1,14 +1,19 @@
-import GlobalStyle from './styles/GlobalStyle';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Reset } from 'styled-reset';
 
+import { ThemeProvider } from 'styled-components';
+import DefaultTheme from 'styles/defaultTheme';
+import GlobalStyle from 'styles/GlobalStyle';
+import routes from './routes';
+
+const router = createBrowserRouter(routes);
 function App() {
   return (
-    <>
+    <ThemeProvider theme={DefaultTheme}>
+      <Reset />
       <GlobalStyle />
-      <div>
-        쇼핑몰 만들기
-      </div>
-    </>
-
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

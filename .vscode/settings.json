@@ -6,4 +6,5 @@
     "source.fixAll.eslint": "explicit"
   },
   "trailing-spaces.trimOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
 }

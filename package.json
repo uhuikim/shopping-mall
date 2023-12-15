@@ -9,7 +9,11 @@
     "serve": "servor dist index.html 8000 --reload",
     "check": "tsc --noEmit",
     "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage --coverage-reporters html",
+    "watch:test": "jest --watchAll",
+    "codeceptjs": "codeceptjs run --steps",
+    "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +34,7 @@
     "codeceptjs": "^3.5.10",
     "eslint": "^8.55.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
@@ -38,9 +43,10 @@
     "jest-environment-jsdom": "^29.7.0",
     "msw": "^2.0.11",
     "parcel": "^2.10.3",
+    "playwright": "^1.40.1",
     "process": "^0.11.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -48,6 +54,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
     "styled-components": "^6.1.1",
-    "styled-reset": "^4.5.1"
+    "styled-reset": "^4.5.1",
+    "undici": "^6.0.1"
   }
 }
