@@ -54,6 +54,7 @@ module.exports = {
         '**/*.test.jsx',
         '**/*.test.ts',
         '**/*.test.tsx',
+        'src/mocks/**',
       ],
     }],
     'import/extensions': ['error', 'ignorePackages', {
