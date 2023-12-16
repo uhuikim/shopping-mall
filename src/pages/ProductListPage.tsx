@@ -1,10 +1,13 @@
-function ProductListPage() {
-  // 1. 상품 목록 얻기
+import Products from 'components/product-list/Products';
+import useFetchProducts from 'hooks/useFetchProducts';
 
-  // 2. 보여주기
+function ProductListPage() {
+  const { products } = useFetchProducts();
+
   return (
     <div>
-      dd
+      <h2>Product</h2>
+      <Products products={products} />
     </div>
   );
 }

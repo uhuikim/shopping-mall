@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 
-import defaultTheme from './styles/defaultTheme';
+import defaultTheme from 'styles/defaultTheme';
 
 type Option = {
   path?: string;

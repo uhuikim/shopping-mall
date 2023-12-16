@@ -1,4 +1,5 @@
-/* eslint-disable import/no-unresolved */
+/* eslint-disable @typescript-eslint/no-var-requires */
+// jest.polyfills.js
 /**
  * @note The block below contains polyfills for Node.js globals
  * required for Jest to function when running JSDOM tests.
@@ -9,18 +10,22 @@
  * you don't want to deal with this.
  */
 
-import { TextDecoder, TextEncoder } from 'node:util';
+const { ReadableStream } = require('node:stream/web');
 
-import { Blob, File } from 'node:buffer';
+const { TextDecoder, TextEncoder } = require('node:util');
 
-import {
-  fetch, Headers, FormData, Request, Response,
-} from 'undici';
-
+if (globalThis.ReadableStream === undefined) {
+  globalThis.ReadableStream = ReadableStream;
+}
 Object.defineProperties(globalThis, {
   TextDecoder: { value: TextDecoder },
   TextEncoder: { value: TextEncoder },
 });
+
+const { Blob, File } = require('node:buffer');
+const {
+  fetch, Headers, FormData, Request, Response,
+} = require('undici');
 
 Object.defineProperties(globalThis, {
   fetch: { value: fetch, writable: true },
