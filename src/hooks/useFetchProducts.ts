@@ -1,17 +1,16 @@
-import { ProductSummary } from 'types';
-import { useFetch } from 'usehooks-ts';
-
-type Data = {
-    products : ProductSummary[]
-}
-
-const apiBaseUrl = 'https://shop-demo-api-01.fly.dev';
+import useProductsStore from 'stores/useProductsStore';
+import { useEffectOnce } from 'usehooks-ts';
 
 const useFetchProducts = () => {
-  const { data } = useFetch<Data>(`${apiBaseUrl}/products`);
+  const products = useProductsStore((state) => state.products);
+  const fetchProducts = useProductsStore((state) => state.fetchProducts);
+
+  useEffectOnce(() => {
+    fetchProducts();
+  });
 
   return {
-    products: data?.products ?? [],
+    products: products ?? [],
   };
 };
 
