@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { apiService } from 'services/ApiService';
 import { ProductSummary } from 'types';
 import { create } from 'zustand';
 
@@ -10,13 +10,11 @@ type Actions = {
   fetchProducts: () => void
 
 }
-const apiBaseUrl = 'https://shop-demo-api-01.fly.dev';
 
 const useProductsStore = create<State & Actions>((set) => ({
   products: [],
   fetchProducts: async () => {
-    const { data } = await axios.get(`${apiBaseUrl}/products`);
-    const { products } = data;
+    const products = await apiService.fetchProducts();
     set(() => ({ products }));
   },
 }));

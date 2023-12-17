@@ -10,7 +10,7 @@ const useFetchProducts = () => {
   });
 
   return {
-    products: products ?? [],
+    products,
   };
 };
 
