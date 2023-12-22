@@ -7,14 +7,14 @@ type State = {
 }
 
 type Actions = {
-  fetchProducts: () => void
+  fetchProducts: ({ categoryId } : {categoryId ?:string}) => void
 
 }
 
 const useProductsStore = create<State & Actions>((set) => ({
   products: [],
-  fetchProducts: async () => {
-    const products = await apiService.fetchProducts();
+  fetchProducts: async ({ categoryId }) => {
+    const products = await apiService.fetchProducts({ categoryId });
     set(() => ({ products }));
   },
 }));
