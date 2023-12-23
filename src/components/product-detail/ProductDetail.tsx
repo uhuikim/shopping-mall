@@ -2,6 +2,7 @@ import useProductDetailStore from 'stores/useProductDetailStore';
 import styled from 'styled-components';
 import Images from './Images';
 import Description from './Description';
+import AddToCartForm from './form/AddToCartForm';
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ function ProductDetail() {
       </aside>
       <article>
         <h2>{product.name}</h2>
-        {/* <AddToCartForm /> */}
+        <AddToCartForm />
         <Description value={product.description} />
       </article>
     </Container>

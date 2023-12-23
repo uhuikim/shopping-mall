@@ -67,4 +67,14 @@ describe('routes', () => {
       });
     });
   });
+
+  context('when the current path is "/cart"', () => {
+    it('renders the cart page', async () => {
+      renderRouter('/cart');
+
+      await waitFor(() => {
+        screen.getByText(/합계/);
+      });
+    });
+  });
 });
