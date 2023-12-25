@@ -13,7 +13,7 @@ const store = {
   changeOptionItem: jest.fn(),
 };
 
-jest.mock('../../../hooks/useProductFormStore', () => () => [store, store]);
+jest.mock('stores/useProductFormStore', () => () => (store));
 
 const context = describe;
 
@@ -41,7 +41,7 @@ describe('Options', () => {
         target: { value: item.id },
       });
 
-      expect(store.changeOptionItem).toBeCalledWith({
+      expect(store.changeOptionItem).toHaveBeenCalledWith({
         optionId: option.id,
         optionItemId: item.id,
       });

@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom';
 import { Image } from 'types';
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from 'testHelper';

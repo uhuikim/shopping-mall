@@ -7,7 +7,7 @@ const store = {
   changeQuantity: jest.fn(),
 };
 
-jest.mock('../../../hooks/useProductFormStoreHooks', () => () => [store, store]);
+jest.mock('stores/useProductFormStore', () => () => store);
 
 const context = describe;
 
@@ -28,7 +28,7 @@ describe('Quantity', () => {
 
       fireEvent.click(screen.getByRole('button', { name: '+' }));
 
-      expect(store.changeQuantity).toBeCalledWith(7 + 1);
+      expect(store.changeQuantity).toHaveBeenCalledWith(7 + 1);
     });
   });
 
@@ -38,7 +38,7 @@ describe('Quantity', () => {
 
       fireEvent.click(screen.getByRole('button', { name: '-' }));
 
-      expect(store.changeQuantity).toBeCalledWith(7 - 1);
+      expect(store.changeQuantity).toHaveBeenCalledWith(7 - 1);
     });
   });
 });

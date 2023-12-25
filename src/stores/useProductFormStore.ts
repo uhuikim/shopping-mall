@@ -15,7 +15,10 @@ type State = {
 
 type Actions = {
   changeQuantity: (quantity : number) => void,
-  addToCart : () =>void
+  addToCart : () =>void,
+  changeOptionItem:({ optionId, optionItemId } : {
+    optionId : string, optionItemId : string
+  })=>void
 }
 
 const useProductFormStore = create<State & Actions>((set) => ({
@@ -59,9 +62,9 @@ const useProductFormStore = create<State & Actions>((set) => ({
   changeOptionItem: ({ optionId, optionItemId } : {
     optionId : string, optionItemId : string
   }) => {
-    set(() => ({
-      selectedOptionItems: product.options.map((option, index) => {
-        const item = this.selectedOptionItems[index];
+    set((state) => ({
+      selectedOptionItems: state.product.options.map((option, index) => {
+        const item = state.selectedOptionItems[index];
         return option.id !== optionId
           ? item
           : option.items.find((i) => i.id === optionItemId) ?? item;

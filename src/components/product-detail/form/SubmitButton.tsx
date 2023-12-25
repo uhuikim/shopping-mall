@@ -8,7 +8,7 @@ export default function SubmitButton() {
   }));
 
   const handleClick = () => {
-    store.addToCart();
+    addToCart();
   };
 
   if (done) {

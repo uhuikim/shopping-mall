@@ -1,11 +1,12 @@
 import { ChangeFunction } from 'types';
+import useProductFormStore from 'stores/useProductFormStore';
 import Option from './Option';
 
 export default function Options() {
-  const [{ options, selectedOptionItems }, store] = useProductFormStore();
+  const { options, selectedOptionItems, changeOptionItem } = useProductFormStore();
 
   const handleChange: ChangeFunction = ({ optionId, optionItemId }) => {
-    store.changeOptionItem({ optionId, optionItemId });
+    changeOptionItem({ optionId, optionItemId });
   };
 
   return (
