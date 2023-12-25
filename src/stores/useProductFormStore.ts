@@ -38,7 +38,7 @@ const useProductFormStore = create<State & Actions>((set) => ({
   selectedOptionItems: [],
   price: 0,
   setProduct: (product) => {
-    set(() => ({ product, price: product.price }));
+    set((state) => ({ product, price: product.price * state.quantity }));
   },
   changeQuantity: (quantity : number) => {
     if (quantity <= 0) {
