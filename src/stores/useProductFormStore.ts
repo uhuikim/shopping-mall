@@ -10,7 +10,8 @@ type State = {
   productId : string,
   product : ProductDetail,
   options : ProductOption[],
-  selectedOptionItems: ProductOptionItem[]
+  selectedOptionItems: ProductOptionItem[],
+  price:number
 }
 
 type Actions = {
@@ -18,9 +19,16 @@ type Actions = {
   addToCart : () =>void,
   changeOptionItem:({ optionId, optionItemId } : {
     optionId : string, optionItemId : string
-  })=>void
+  })=>void,
+  setProduct : (product : ProductDetail)=>void
 }
 
+// 강의에서는 getter함수를 만들어서 Price를 가져왔지만 zustand에는 getter기능이 없다.
+// state가 변경 될 때 그 값을 반영해서 계산해주는 getter 함수를 만들 수 없어...그냥 price state를 만들었다.
+/* get price(){
+  return this.product.price * this.quantity
+}
+*/
 const useProductFormStore = create<State & Actions>((set) => ({
   quantity: 1,
   done: false,
@@ -28,6 +36,10 @@ const useProductFormStore = create<State & Actions>((set) => ({
   options: [],
   product: nullProductDetail,
   selectedOptionItems: [],
+  price: 0,
+  setProduct: (product) => {
+    set(() => ({ product, price: product.price }));
+  },
   changeQuantity: (quantity : number) => {
     if (quantity <= 0) {
       return;
@@ -36,7 +48,7 @@ const useProductFormStore = create<State & Actions>((set) => ({
     if (quantity > 10) {
       return;
     }
-    set(() => ({ quantity }));
+    set((state) => ({ quantity, price: state.product.price * quantity }));
   },
 
   addToCart: async () => {
@@ -58,7 +70,6 @@ const useProductFormStore = create<State & Actions>((set) => ({
       done: true,
     }));
   },
-
   changeOptionItem: ({ optionId, optionItemId } : {
     optionId : string, optionItemId : string
   }) => {

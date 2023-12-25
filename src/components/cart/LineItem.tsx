@@ -10,7 +10,7 @@ function LineItem({ lineItem }: LineItemProp) {
   return (
     <tr>
       <td>
-        <Link to={`products/${lineItem.product.id}`}>
+        <Link to={`/products/${lineItem.product.id}`}>
           {lineItem.product.name}
         </Link>
         <Options options={lineItem.options} />
