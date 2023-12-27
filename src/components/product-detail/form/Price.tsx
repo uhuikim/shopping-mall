@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import useProductDetailStore from 'stores/useProductDetailStore';
 import useProductFormStore from 'stores/useProductFormStore';
 import styled from 'styled-components';
 import numberFormat from 'utils/numberFormat';
@@ -10,13 +8,7 @@ const Container = styled.div`
 `;
 
 export default function Price() {
-  const product = useProductDetailStore((state) => state.product);
   const price = useProductFormStore((state) => state.price);
-  const setProduct = useProductFormStore((state) => state.setProduct);
-
-  useEffect(() => {
-    setProduct(product);
-  }, []);
 
   return (
     <Container>

@@ -19,6 +19,7 @@ type ComboBoxProps<T> = {
 export default function ComboBox<T>({
   label, selectedItem, items, itemToId, itemToText, onChange,
 }: ComboBoxProps<T>) {
+  // id를 생성하는 방법 변경해보기
   const id = useRef(`combobox-${Math.random().toString().slice(2)}`);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

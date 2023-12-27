@@ -3,7 +3,7 @@ import useProductFormStore from 'stores/useProductFormStore';
 import Option from './Option';
 
 export default function Options() {
-  const { options, selectedOptionItems, changeOptionItem } = useProductFormStore();
+  const { product, selectedOptionItems, changeOptionItem } = useProductFormStore();
 
   const handleChange: ChangeFunction = ({ optionId, optionItemId }) => {
     changeOptionItem({ optionId, optionItemId });
@@ -11,7 +11,7 @@ export default function Options() {
 
   return (
     <div>
-      {options.map((option, index) => (
+      {product.options.map((option, index) => (
         <Option
           key={option.id}
           option={option}

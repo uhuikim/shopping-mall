@@ -1,5 +1,5 @@
 import { renderWithProviders } from 'testHelper';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import SubmitButton from './SubmitButton';
 
 let done = false;
@@ -10,7 +10,7 @@ const store = {
   addToCart: jest.fn(),
 };
 
-jest.mock('../../hooks/useProductFormStore', () => () => [store, store]);
+jest.mock('stores/useProductFormStore', () => () => (store));
 
 const context = describe;
 
@@ -28,6 +28,15 @@ describe('SubmitButton', () => {
       renderWithProviders(<SubmitButton />);
 
       expect(screen.getByRole('button')).toHaveTextContent('장바구니에 담기');
+    });
+
+    context('when the button is clicked', () => {
+      it('calls addToCart action', () => {
+        renderWithProviders(<SubmitButton />);
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(store.addToCart).toHaveBeenCalled();
+      });
     });
   });
 

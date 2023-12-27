@@ -1,15 +1,13 @@
 import { apiService } from 'services/ApiService';
 import {
-  ProductDetail, ProductOption, ProductOptionItem, nullProductDetail,
+  ProductDetail, ProductOptionItem, nullProductDetail,
 } from 'types';
 import { create } from 'zustand';
 
 type State = {
   quantity: number,
   done : boolean,
-  productId : string,
   product : ProductDetail,
-  options : ProductOption[],
   selectedOptionItems: ProductOptionItem[],
   price:number
 }
@@ -29,16 +27,20 @@ type Actions = {
   return this.product.price * this.quantity
 }
 */
-const useProductFormStore = create<State & Actions>((set) => ({
+const useProductFormStore = create<State & Actions>((set, get) => ({
   quantity: 1,
   done: false,
-  productId: '',
-  options: [],
   product: nullProductDetail,
   selectedOptionItems: [],
   price: 0,
-  setProduct: (product) => {
-    set((state) => ({ product, price: product.price * state.quantity }));
+  setProduct: (product : ProductDetail) => {
+    set((state) => ({
+      product,
+      productId: product.id,
+      selectedOptionItems: product.options.map((i) => i.items[0]),
+      price: product.price * state.quantity,
+      done: false,
+    }));
   },
   changeQuantity: (quantity : number) => {
     if (quantity <= 0) {
@@ -48,17 +50,21 @@ const useProductFormStore = create<State & Actions>((set) => ({
     if (quantity > 10) {
       return;
     }
-    set((state) => ({ quantity, price: state.product.price * quantity }));
+
+    set((state) => ({ quantity, price: state.price * quantity }));
   },
 
   addToCart: async () => {
     set(() => ({
       done: false,
     }));
+    const {
+      product, selectedOptionItems, quantity,
+    } = get();
 
     await apiService.addProductToCart({
-      productId,
-      options: options.map((option, index) => ({
+      productId: product.id,
+      options: product.options.map((option, index) => ({
         id: option.id,
         itemId: selectedOptionItems[index].id,
       })),
@@ -70,6 +76,7 @@ const useProductFormStore = create<State & Actions>((set) => ({
       done: true,
     }));
   },
+
   changeOptionItem: ({ optionId, optionItemId } : {
     optionId : string, optionItemId : string
   }) => {
