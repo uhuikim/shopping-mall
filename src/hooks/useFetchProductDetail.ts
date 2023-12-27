@@ -18,7 +18,7 @@ const useFetchProductDetail = ({ productId } : {productId ?: string} = {}) => {
 
   useEffect(() => {
     setProduct(product);
-  }, []);
+  }, [product]);
 
   useEffect(() => {
     fetchProduct({ productId });

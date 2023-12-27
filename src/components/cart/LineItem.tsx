@@ -21,7 +21,6 @@ function LineItem({ lineItem }: LineItemProp) {
       </td>
       <td>
         {numberFormat(lineItem.quantity)}
-        원
       </td>
       <td>
         {numberFormat(lineItem.totalPrice)}

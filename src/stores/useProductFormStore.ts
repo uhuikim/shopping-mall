@@ -34,11 +34,11 @@ const useProductFormStore = create<State & Actions>((set, get) => ({
   selectedOptionItems: [],
   price: 0,
   setProduct: (product : ProductDetail) => {
-    set((state) => ({
+    set(() => ({
       product,
       productId: product.id,
       selectedOptionItems: product.options.map((i) => i.items[0]),
-      price: product.price * state.quantity,
+      price: product.price,
       done: false,
     }));
   },
