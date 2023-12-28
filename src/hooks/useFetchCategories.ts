@@ -7,7 +7,7 @@ const useFetchCategories = () => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   return {
     categories,

@@ -7,7 +7,7 @@ const useFetchProducts = ({ categoryId } : {categoryId ?: string}) => {
 
   useEffect(() => {
     fetchProducts({ categoryId });
-  }, [categoryId]);
+  }, [categoryId, fetchProducts]);
 
   return {
     products,

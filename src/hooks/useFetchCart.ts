@@ -7,7 +7,7 @@ const useFetchCart = () => {
 
   useEffect(() => {
     fetchCart();
-  }, []);
+  }, [fetchCart]);
 
   return {
     cart,
