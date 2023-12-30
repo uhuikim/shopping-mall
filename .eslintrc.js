@@ -50,6 +50,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'key-spacing': ['error', { mode: 'strict' }],
     'arrow-spacing': ['error', { before: true, after: true }],
+    'react/require-default-props': [2, { functions: 'defaultArguments' }],
     'import/no-extraneous-dependencies': ['error', {
       devDependencies: [
         '**/*.test.js',

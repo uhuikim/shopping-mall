@@ -5,10 +5,10 @@ import fixtures from '../../../../fixtures';
 import AddToCartForm from './AddToCartForm';
 
 test('AddToCartForm', async () => {
-  // const [product] = fixtures.products;
-  // const fetchProduct = useProductDetailStore((state) => state.fetchProduct);
+  const [product] = fixtures.products;
+  const fetchProduct = useProductDetailStore((state) => state.fetchProduct);
 
-  // await fetchProduct({ productId: product.id });
+  await fetchProduct({ productId: product.id });
 
   renderWithProviders(<AddToCartForm />);
   fireEvent.click(screen.getByText('장바구니에 담기'));

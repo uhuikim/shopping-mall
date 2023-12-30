@@ -39,6 +39,15 @@ export default class ApiService {
     return data;
   }
 
+  async login({ email, password }: {
+    email: string;
+    password: string;
+  }): Promise<string> {
+    const { data } = await this.instance.post('/session', { email, password });
+    const { accessToken } = data;
+    return accessToken;
+  }
+
   async addProductToCart({ productId, options, quantity }: {
     productId: string;
     options: {
