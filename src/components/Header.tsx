@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useFetchCategories from 'hooks/useFetchCategories';
 import useAccessToken from 'hooks/useAccessToken';
+import { apiService } from 'services/ApiService';
 import Button from './ui/Button';
 
 const Container = styled.header`
@@ -30,13 +31,15 @@ const Container = styled.header`
 `;
 
 export default function Header() {
+  const navigate = useNavigate();
   const { accessToken, setAccessToken } = useAccessToken();
 
   const { categories } = useFetchCategories();
 
   const handleClickLogout = async () => {
+    await apiService.logout();
     setAccessToken('');
-    // navigate('/');
+    navigate('/');
   };
 
   return (

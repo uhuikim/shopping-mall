@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import useCheckAccessToken from 'hooks/useCheckAccessToken';
 import Header from './Header';
 
 const Container = styled.div`
@@ -10,6 +11,8 @@ const Container = styled.div`
 `;
 
 export default function Layout() {
+  useCheckAccessToken();
+
   return (
     <Container>
       <Header />

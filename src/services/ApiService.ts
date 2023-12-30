@@ -77,6 +77,19 @@ export default class ApiService {
       productId, options, quantity,
     });
   }
+
+  async fetchCurrentUser(): Promise<{
+    id: string;
+    name: string;
+  }> {
+    const { data } = await this.instance.get('/users/me');
+    const { id, name } = data;
+    return { id, name };
+  }
+
+  async logout(): Promise<void> {
+    await this.instance.delete('/session');
+  }
 }
 
 export const apiService = new ApiService();

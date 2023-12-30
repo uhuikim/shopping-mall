@@ -1,13 +1,20 @@
 import { renderWithProviders } from 'testHelper';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import Header from './Header';
 
+const navigate = jest.fn();
+
 let accessToken = '';
+const setAccessToken = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => navigate,
+}));
 
 jest.mock('hooks/useAccessToken', () => () => ({
-  get accessToken() {
-    return accessToken;
-  },
+  accessToken,
+  setAccessToken,
 }));
 
 jest.mock('hooks/useFetchCategories', () => () => ({
@@ -17,6 +24,10 @@ jest.mock('hooks/useFetchCategories', () => () => ({
 const context = describe;
 
 describe('Header', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders title', () => {
     renderWithProviders(<Header />);
 
@@ -52,10 +63,17 @@ describe('Header', () => {
       screen.getByRole('link', { name: 'Cart' });
     });
 
-    it('renders “Logout” button', () => {
+    it('renders “Logout” button', async () => {
       renderWithProviders(<Header />);
 
-      screen.getByRole('button', { name: 'Logout' });
+      const button = screen.getByRole('button', { name: 'Logout' });
+
+      fireEvent.click(button);
+
+      await waitFor(() => {
+        expect(setAccessToken).toBeCalledWith('');
+        expect(navigate).toBeCalledWith('/');
+      });
     });
   });
 });
