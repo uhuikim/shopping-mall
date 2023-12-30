@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 import useFetchCategories from 'hooks/useFetchCategories';
+import useAccessToken from 'hooks/useAccessToken';
+import Button from './ui/Button';
 
 const Container = styled.header`
   margin-bottom: 2rem;
@@ -28,7 +30,14 @@ const Container = styled.header`
 `;
 
 export default function Header() {
+  const { accessToken, setAccessToken } = useAccessToken();
+
   const { categories } = useFetchCategories();
+
+  const handleClickLogout = async () => {
+    setAccessToken('');
+    // navigate('/');
+  };
 
   return (
     <Container>
@@ -52,9 +61,22 @@ export default function Header() {
               </ul>
             )}
           </li>
-          <li>
-            <Link to="/cart">Cart</Link>
-          </li>
+
+          {accessToken ? (
+            <>
+              <li>
+                <Link to="/cart">Cart</Link>
+              </li>
+              <li>
+                <Button onClick={handleClickLogout}>Logout</Button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          )}
+
         </ul>
       </nav>
     </Container>

@@ -11,6 +11,23 @@ export default class ApiService {
     baseURL: API_BASE_URL,
   });
 
+  private accessToken = '';
+
+  setAccessToken(accessToken: string) {
+    if (accessToken === this.accessToken) {
+      return;
+    }
+
+    const authorization = accessToken ? `Bearer ${accessToken}` : undefined;
+
+    this.instance = axios.create({
+      baseURL: API_BASE_URL,
+      headers: { Authorization: authorization },
+    });
+
+    this.accessToken = accessToken;
+  }
+
   async fetchCategories(): Promise<Category[]> {
     const { data } = await this.instance.get('/categories');
     const { categories } = data;

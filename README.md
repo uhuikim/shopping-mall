@@ -5,3 +5,12 @@ https://shop-demo-api-01.fly.dev/backdoor/setup-database
 
 
 react-hook 린트 에러가 발생하고 있지 않음
+
+
+github fetch polyfill
+npm install whatwg-fetch --save
+
+import 'whatwg-fetch'
+
+tester@example.com
+password
